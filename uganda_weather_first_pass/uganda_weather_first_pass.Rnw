@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[center]{titlesec}
+\usepackage{geometry}
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+%\usepackage{mathtools}
+
+\usepackage[sort, numbers]{natbib}
+
+
+%
+%\setlength{\columnseprule}{0.4pt}
+%\setlength{\footskip}{20pt}
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[C]{Weather data $\bullet$ Joe Brew }
+\fancyfoot[C]{  $\bullet$ Uganda \bullet$  }
+\renewcommand\headrulewidth{1pt}
+\renewcommand\footrulewidth{1pt}
+\pagestyle{fancy}
+
+%
+
+\setlength{\columnsep}{1.5cm}
+%\setlength{\columnseprule}{0.4pt}
+
+%\MakeOuterQuote{"}
+
+
+
+\graphicspath{ {/home/joebrew/Documents/weather/uganda/uganda_weather_first_pass} }
+
+%the next two lines adjust the third, centered section of the exec sum
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, echo=FALSE, results = hide}
+
+\title{\textbf{Uganda Weather: First Pass}}
+\author{Joe Brew}
+
+
+\maketitle
+
+<<fig = TRUE, height =2.5 >>=
+setwd('/home/joebrew/Documents/weather/uganda_weather_first_pass')
+source('/home/joebrew/Documents/weather/uganda/gadm.R')
+gadm("UGANDA", 3)
+# Make lat lon
+library(rgdal)
+uganda3 <- spTransform(uganda3,  CRS("+init=epsg:4326"))
+
+# Remove the lake by getting rid of the largest area polygon
+library(rgeos)
+uganda3$area <- gArea(uganda3, byid = TRUE)
+uganda3 <- uganda3[which(uganda3$area != max(uganda3$area)),]
+
+# Plot map of Uganda
+uganda_colors <- adjustcolor(colorRampPalette(c("black", "darkgrey"))(nrow(uganda3)), 
+                             alpha.f = 0.7)
+par(mar = c(0,0,0,0))
+plot(uganda3,
+     col = uganda_colors,
+     lwd = 0.2,
+     border = NA)
+
+@
+
+\emph{
+\noindent The following is a brief overview of a first attempt to systematically collect Ugandan weather-related data.  I outline (a) the method employed (webscraping from Wunderground), (b) the results (mediocre at best), (c) advantages (few) and shortcomings (many) and (d) options for moving forward. }
+\tableofcontents
+
+\vspace{20mm}
+
+\begin{center}
+\includegraphics[width=2cm]{logo}
+\end{center}
+
+
+\newgeometry{margin=2.5cm}
+%\fancyhfoffset[E,O]{0pt}
+
+
+%------------------------------------------
+\section*{Webscraping Ugandan weather data}
+\addcontentsline{toc}{section}{Webscraping Ugandan weather data}
+%------------------------------------------
+\hrulefill
+
+\begin{multicols}{2} 
+\setkeys{Gin}{width=0.45\textwidth}
+
+%------------------------------------------
+\subsection*{Method}
+\addcontentsline{toc}{subsection}{Method}
+%------------------------------------------
+
+\lettrine[nindent=0em,lines=3]{I}{} wrote some code in R to scrape 
+
+%------------------------------------------
+\subsection*{Results}
+\addcontentsline{toc}{subsection}{Results}
+%------------------------------------------
+\blindtext
+
+\begin{center}
+<<fig = TRUE, results=hide>>=
+my_number <- 100
+x <- 1:my_number
+my_colors <- colorRampPalette(c("green", "blue"))(my_number)
+barplot(x, col = my_colors, border = NA, space = 0)
+box("plot")
+title(main = "main title", sub = "subtitle", line = 0.5,
+      font.main = 1, font.sub = 1)
+@
+\end{center}
+
+%------------------------------------------
+\subsection*{Advantages and shortcomings}
+\addcontentsline{toc}{subsection}{Advantages and shortcomings}
+%------------------------------------------
+\blindtext
+
+%------------------------------------------
+\subsection*{Moving forward}
+\addcontentsline{toc}{subsection}{Moving forward}
+%------------------------------------------
+\blindtext
+
+
+
+
+\end{multicols}
+\setkeys{Gin}{width=1\textwidth}
+%----------------------------------------------------------------------------------------
+%  REFERENCE LIST
+%----------------------------------------------------------------------------------------
+\newpage
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
+
+
+\end{document}

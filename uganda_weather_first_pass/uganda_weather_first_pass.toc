@@ -1,0 +1,6 @@
+\select@language {english}
+\contentsline {section}{Webscraping Ugandan weather data}{2}{Doc-Start}
+\contentsline {subsection}{Method}{2}{section*.1}
+\contentsline {subsection}{Results}{2}{section*.1}
+\contentsline {subsection}{Advantages and shortcomings}{2}{section*.1}
+\contentsline {subsection}{Moving forward}{2}{section*.1}

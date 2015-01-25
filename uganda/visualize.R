@@ -1,4 +1,4 @@
-setwd('weather/uganda')
+setwd('/home/joebrew/Documents/weather/uganda')
 
 # Read in scraped data
 dat <- read.csv("uganda_weather.csv", stringsAsFactors = FALSE)
@@ -48,7 +48,8 @@ for (i in unique(sort(dat$loc))){
   # maximum
   plot_temp(loc = i,
             var = "humidity_max",
-            ylim = c(0,100))
+            ylim = c(0,100),
+            ylab = "Percent")
   # minimum
   plot_temp(loc = i,
             var = "humidity_min",
@@ -57,14 +58,15 @@ for (i in unique(sort(dat$loc))){
             add_lines = TRUE,
             add_rolling_lines = TRUE,
             rolling_days = 14,
-            add = TRUE)
+            add = TRUE,
+            ylab = "Percent")
   # Add title
   title(main = "Humidity")
   # Add legend
   legend(x = "bottomleft",
          col = adjustcolor(c("darkred", "darkgreen"), alpha.f = 0.4),
          pch = 16,
-         cex = 0.7, 
+         cex = 0.4, 
          lty = 1,
          legend = c("Max", "Min"),
          bty = "n")

@@ -38,7 +38,9 @@ plot_temp <- function(loc = "Entebbe",
          xlab = "Date",
          ylab = ylab,
          ylim = ylim,
-         cex = 0.5)
+         cex = 0.5,
+         cex.axis = 0.6,
+         cex.lab = 0.6)
   } else {
     points(x = data$date,
            y = data[,var],
@@ -99,13 +101,15 @@ plot_rain <- function(loc = "Entebbe",
                 ylab = ylab,
                 border = adjustcolor(color, alpha.f = 0.3),
                 space = 0,
-                las = 3)
+                las = 3,
+                cex.axis = 0.6,
+                cex.lab = 0.6)
   
   # Axis
   axis(side = 1,
        at = bp[,1][which(format(data$date, "%m%d") == "0101")],
        labels = format(data$date[which(format(data$date, "%m%d") == "0101")], format = "%Y"),
-       cex.axis = 1,
+       cex.axis = 0.6,
        tick = FALSE)
 
   if(add_rolling_lines){
@@ -123,6 +127,7 @@ plot_rain <- function(loc = "Entebbe",
          col = adjustcolor(c(color, rolled_color), alpha.f = 0.4),
          lwd = 1,
          bty = "n",
+         cex = 0.4,
          legend = c("Daily observation", 
                     paste(rolling_days, "rolling average")))
   box("plot")
@@ -176,7 +181,9 @@ plot_clouds <- function(loc = "Entebbe",
            pch = 16,
            xlab = "Date",
            ylab = ylab,
-           cex = 0.5)
+           cex = 0.5,
+           cex.axis = 0.6,
+           cex.lab = 0.6)
    
     if(add_lines){
       lines(x = data$date,
@@ -197,6 +204,7 @@ plot_clouds <- function(loc = "Entebbe",
     legend(x = "topleft",
            col = adjustcolor(c(color, rolled_color), alpha.f = 0.4),
            lwd = 1,
+           cex = 0.4,
            bty = "n",
            legend = c("Daily observation", 
                       paste(rolling_days, "rolling average")))

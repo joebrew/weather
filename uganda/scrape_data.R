@@ -1,5 +1,5 @@
 setwd('weather/uganda')
-get_weather <- function(station = "ICENTRAL28", # IWESTERN307
+get_weather <- function(station = "KAMPALA", # IWESTERN307
                         start_date = Sys.Date() - 365,
                         end_date = Sys.Date(),
                         airport = TRUE){
@@ -87,8 +87,11 @@ get_weather <- function(station = "ICENTRAL28", # IWESTERN307
   
   # Add a location column
   df$loc <- toupper(as.character(station))
-  return(df)
   
+  # print url source
+  print(link)
+  
+  return(df)
 }
 
 # # Airport example:

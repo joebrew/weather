@@ -1,5 +1,5 @@
-get_weather <- function(station = "MPM", # CDG, BGT, ATL, JFK
-                                start_year = 2014,
+get_weather <- function(station = "FQMA", # CDG, BGT, ATL, JFK
+                                start_year = 2000,
                                 end_year = 2016,
                                 plot = FALSE,
                                 save = TRUE,
